@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Quadcopter Control</title>
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+    <link rel="shortcut icon" href="drone-icon.png">
+    <script src="javascript/angular.min.js" charset="utf-8"></script>
+    <script src="javascript/jquery-2.2.0.js" charset="utf-8"></script>
+    <script src="javascript/script.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="motor-control">
+      <div id="motor1" class="motor">
+        <div class="incr">
+          +
+        </div>
+        <div class="decr">
+          -
+        </div>
+        <div class="label">
+          Motor 1
+        </div>
+      </div>
+
+      <div id="motor2" class="motor">
+        <div class="incr">
+          +
+        </div>
+        <div class="decr">
+          -
+        </div>
+        <div class="label">
+          Motor 2
+        </div>
+      </div>
+
+      <div id="motor3" class="motor">
+        <div class="incr">
+          +
+        </div>
+        <div class="decr">
+          -
+        </div>
+        <div class="label">
+          Motor 3
+        </div>
+      </div>
+
+      <div id="motor4" class="motor">
+        <div class="incr">
+          +
+        </div>
+        <div class="decr">
+          -
+        </div>
+        <div class="label">
+          Motor 4
+        </div>
+      </div>
+    </div>
+
+    <div class="lights">
+      <div id="red" class="light-button" data-state="off" value="red">
+      </div>
+      <div id="yellow" class="light-button" data-state="off" value="yellow">
+      </div>
+      <div id="blue" class="light-button" data-state="off" value="blue">
+      </div>
+      <div id="green" class="light-button" data-state="off" value="green">
+      </div>
+    </div>
+
+    <div class="main-buttons">
+      <div class="button-container">
+
+        <div class="start-button main-button" value="up">
+        </div>
+
+        <div class="stop-button main-button" value="down">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="led-control">
+		<div class="init" value="init">
+			<span>Intialize LEDs</span>
+		</div>
+		<div class="clean" value="clean">
+			<span>Cleanup LEDs</span>
+		</div>
+    </div>
+
+  </body>
+</html>

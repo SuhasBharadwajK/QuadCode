@@ -1,0 +1,125 @@
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.motor-control {
+  float: left;
+}
+
+.motor-control > div {
+  display: inline-block;
+}
+
+.incr, .decr {
+  height: 100px;
+  width: 100px;
+  background-color: rgb(144, 144, 144);
+  border-radius: 50%;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  text-align: center;
+  font-size: 70px;
+  color: white;
+}
+
+.incr {
+  height: 90px;
+  padding-top: 10px;
+}
+
+.label {
+  text-align: center;
+}
+
+.lights {
+  float: right;
+}
+
+.lights div {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin-left: 10px;
+  border: 2px solid white;
+}
+
+#red {
+  //background-color: crimson;
+  border: 2px solid crimson;
+}
+
+#yellow {
+  //background-color: rgb(228, 214, 21);
+  border: 2px solid rgb(228, 214, 21);
+}
+
+#blue {
+  //background-color: blue;
+  border: 2px solid blue;
+}
+
+#green {
+  //background-color: green;
+  border: 2px solid green;
+}
+
+.main-buttons {
+  clear: both;
+  float: left;
+  //width: 100%;
+}
+
+.main-buttons > div {
+  margin: 0 auto;
+  //width: 60%;
+}
+
+.main-buttons .main-button {
+  height: 150px;
+  width: 150px;
+  background-color: black;
+  display: inline-block;
+  margin-top: 60px;
+  border-radius: 20px;
+  margin-right: 100px;
+}
+
+.main-buttons .start-button {
+  background-color: rgb(8, 199, 96);
+}
+
+.main-buttons .stop-button {
+  background-color: rgb(185, 63, 63);
+}
+
+.led-control {
+	clear: both;
+	float: right;
+}
+
+.led-control > div {
+	display: inline-block;
+	background-color: grey;
+	border-radius: 15px;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	width: 100px;
+	height: 60px;      
+	padding-top: 40px;
+	margin-right: 40px;
+}
+/*.led-control span {
+	margin-top: 135px;
+}*/
+
+.init {
+}
+
+.clean {
+}
