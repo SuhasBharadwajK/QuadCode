@@ -32,35 +32,37 @@ while running:
 	motor3.ChangeDutyCycle(dutyCycle)
 	motor4.ChangeDutyCycle(dutyCycle)'''
 	if res == 'w':
-		dutyCycle = dutyCycle + 0.1
-	        motor1.ChangeDutyCycle(dutyCycle)
-     	        motor2.ChangeDutyCycle(dutyCycle)
-	        motor3.ChangeDutyCycle(dutyCycle)
-    	        motor4.ChangeDutyCycle(dutyCycle)
+	    dutyCycle = dutyCycle + 0.1
+            motor1.ChangeDutyCycle(dutyCycle)
+            motor2.ChangeDutyCycle(dutyCycle)
+    	    motor3.ChangeDutyCycle(dutyCycle)
+            motor4.ChangeDutyCycle(dutyCycle)
+	        
 
 
 	if res == 's':
-		dutyCycle = dutyCycle - 0.1
-	        motor1.ChangeDutyCycle(dutyCycle)
-        	motor2.ChangeDutyCycle(dutyCycle)
-	        motor3.ChangeDutyCycle(dutyCycle)
-        	motor4.ChangeDutyCycle(dutyCycle)
+    	    dutyCycle = dutyCycle - 0.1
+	    motor1.ChangeDutyCycle(dutyCycle)
+            motor2.ChangeDutyCycle(dutyCycle)
+	    motor3.ChangeDutyCycle(dutyCycle)
+            motor4.ChangeDutyCycle(dutyCycle)
 
         if res == 'q':
-		running = False
-                while dutyCycle > 4:
-                    dutyCycle = dutyCycle - 0.1
-                    motor3.ChangeDutyCycle(dutyCycle)
-                    motor4.ChangeDutyCycle(dutyCycle)
-                    motor2.ChangeDutyCycle(dutyCycle)
-                    motor1.ChangeDutyCycle(dutyCycle)
-                    time.sleep(0.1)
-
-		motor1.stop()
-		motor2.stop()
-		motor3.stop()
-		motor4.stop()
-		GPIO.cleanup()
+            running = False
+            while dutyCycle > 4:
+                dutyCycle = dutyCycle - 0.1
+                motor3.ChangeDutyCycle(dutyCycle)
+                motor4.ChangeDutyCycle(dutyCycle)
+                motor2.ChangeDutyCycle(dutyCycle)
+                motor1.ChangeDutyCycle(dutyCycle)
+                time.sleep(0.05)
+                
+                        
+                motor1.stop()
+                motor2.stop()
+                motor3.stop()
+                motor4.stop()
+                GPIO.cleanup()
 
 
         print ("Duty cycle is: " + str(dutyCycle))

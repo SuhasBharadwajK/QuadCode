@@ -1,0 +1,17 @@
+       	  Ground	     Pin	    Signal	       Pin
+                        Board                 Board    GPIO
+
+Motor 1 - Black         09          White     11       17
+
+Motor 2 - Brown         14          Pink      13       27
+
+Motor 3 - Yellow        20          Orange    22       25
+
+Motor 4 - Green         39          Blue      40       21
+
+
+
+
+Grounds : Black  Brown  Yellow  Green
+
+Signals : White  Pink   Orange  Blue

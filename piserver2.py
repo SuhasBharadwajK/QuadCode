@@ -23,10 +23,29 @@ GPIO.output(29,GPIO.LOW)
 GPIO.output(18,GPIO.LOW)
 GPIO.output(31,GPIO.LOW)
 
+GPIO.setup(11, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
+GPIO.setup(40, GPIO.OUT)
+
+
+motor1 = GPIO.PWM(11, 50)
+motor2 = GPIO.PWM(13, 50)
+motor3 = GPIO.PWM(22, 50)
+motor4 = GPIO.PWM(40, 50)
+
+dutyCycle = 5
+
+motor1.start(dutyCycle)
+motor2.start(dutyCycle)
+motor3.start(dutyCycle)
+motor4.start(dutyCycle + 0.5)
+
 leds = {"red" : 33, "yellow" : 29, "blue" : 18, "green" : 31}
 switch = {"on" : GPIO.HIGH, "off" : GPIO.LOW}
 
 def act(data):
+    global dutyCycle, motor1, motor2, motor3, motor4
     #args = data.split("&")
     #opType = args[0].split(":")[1]
     
@@ -51,24 +70,56 @@ def act(data):
             GPIO.output(29,GPIO.LOW)
             GPIO.output(18,GPIO.LOW)
             GPIO.output(31,GPIO.LOW)
+            
+            GPIO.setup(11, GPIO.OUT)
+            GPIO.setup(13, GPIO.OUT)
+            GPIO.setup(22, GPIO.OUT)
+            GPIO.setup(40, GPIO.OUT)
 
-            return "Initialized all LED pins."
+
+            motor1 = GPIO.PWM(11, 50)
+            motor2 = GPIO.PWM(13, 50)
+            motor3 = GPIO.PWM(22, 50)
+            motor4 = GPIO.PWM(40, 50)
+
+            dutyCycle = 5
+
+            motor1.start(dutyCycle)
+            motor2.start(dutyCycle)
+            motor3.start(dutyCycle)
+            motor4.start(dutyCycle + 0.5)
+
+            return "Initialized all LED and motor pins."
 
         else:
             for led in leds:
                 GPIO.cleanup(leds[led])
+            GPIO.cleanup(11)
+            GPIO.cleanup(13)
+            GPIO.cleanup(22)
+            GPIO.cleanup(40)
 
-            return "Cleaned up all LED pins."
+            return "Cleaned up all LED and motor pins."
 
     elif data['type'] == "gyro":
         return "Gyro"
 
-    else: #type == throttle
-        if data["value"] == "up":
-            #Do up
-        else
-            #Do down
-        return "Throttle"
+    elif data['type'] == "throttle":
+        if data['direction'] == "up":
+            dutyCycle = dutyCycle + 0.1
+            motor1.ChangeDutyCycle(dutyCycle)
+            motor2.ChangeDutyCycle(dutyCycle)
+	    motor3.ChangeDutyCycle(dutyCycle)
+            motor4.ChangeDutyCycle(dutyCycle)
+            
+        elif data['direction'] == "down":
+            dutyCycle = dutyCycle - 0.1
+            motor1.ChangeDutyCycle(dutyCycle)
+            motor2.ChangeDutyCycle(dutyCycle)
+            motor3.ChangeDutyCycle(dutyCycle)
+            motor4.ChangeDutyCycle(dutyCycle)
+            
+        return "Throttle " + data['direction'] + " by " + str(dutyCycle)
 def main():
     class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         def do_GET(s):
@@ -144,6 +195,4 @@ if __name__ == '__main__':
             sys.exit(0)
         except SystemExit:
             os._exit(0)
-            
-            
-            
+
