@@ -13,26 +13,6 @@ GPIO.cleanup()
 
 GPIO.setmode(GPIO.BOARD)
 
-'''class Drone:
-    def __init__(self):
-        self.motor1 = GPIO.PWM(11, 50)
-        self.motor2 = GPIO.PWM(13, 40)
-        self.motor3 = GPIO.PWM(22, 50)
-        self.motor4 = GPIO.PWM(40, 50)
-
-        self.speeds = [5, 5, 5, 5.5]
-        self.motors = [self.motor1, self.motor2, self.motor3, self.motor4]
-        #self.speeds = {self.motor1
-
-    def start(self):
-        for motor, speed in zip(self.motors, self.speeds):
-            motor.start(speed)
-
-    def goForward(self):
-        #self.motor1.
-        pass
-'''
-
 #GPIO.setwarnings(False)
 
 GPIO.setup(33,GPIO.OUT)
@@ -45,31 +25,12 @@ GPIO.output(29,GPIO.LOW)
 GPIO.output(18,GPIO.LOW)
 GPIO.output(31,GPIO.LOW)
 
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(22, GPIO.OUT)
-GPIO.setup(40, GPIO.OUT)
-
-
-motor1 = GPIO.PWM(11, 50)
-motor2 = GPIO.PWM(13, 50)
-motor3 = GPIO.PWM(22, 50)
-motor4 = GPIO.PWM(40, 50)
-
-dutyCycle = 5
-
-motor1.start(dutyCycle)
-motor2.start(dutyCycle)
-motor3.start(dutyCycle)
-motor4.start(dutyCycle + 0.5)
+drone.start()
 
 leds = {"red" : 33, "yellow" : 29, "blue" : 18, "green" : 31}
 switch = {"on" : GPIO.HIGH, "off" : GPIO.LOW}
 
 def act(data):
-    global dutyCycle, motor1, motor2, motor3, motor4
-    #args = data.split("&")
-    #opType = args[0].split(":")[1]
     
     if data['type'] == "light":
         color = data['color']
@@ -93,33 +54,15 @@ def act(data):
             GPIO.output(18,GPIO.LOW)
             GPIO.output(31,GPIO.LOW)
             
-            GPIO.setup(11, GPIO.OUT)
-            GPIO.setup(13, GPIO.OUT)
-            GPIO.setup(22, GPIO.OUT)
-            GPIO.setup(40, GPIO.OUT)
-
-
-            motor1 = GPIO.PWM(11, 50)
-            motor2 = GPIO.PWM(13, 50)
-            motor3 = GPIO.PWM(22, 50)
-            motor4 = GPIO.PWM(40, 50)
-
-            dutyCycle = 5
-
-            motor1.start(dutyCycle)
-            motor2.start(dutyCycle)
-            motor3.start(dutyCycle)
-            motor4.start(dutyCycle + 0.5)
+            drone.initialize()
+            drone.start()
 
             return "Initialized all LED and motor pins."
 
         else:
             for led in leds:
                 GPIO.cleanup(leds[led])
-            GPIO.cleanup(11)
-            GPIO.cleanup(13)
-            GPIO.cleanup(22)
-            GPIO.cleanup(40)
+            drone.cleanPins()
 
             return "Cleaned up all LED and motor pins."
 
@@ -128,18 +71,10 @@ def act(data):
 
     elif data['type'] == "throttle":
         if data['direction'] == "up":
-            dutyCycle = dutyCycle + 0.1
-            motor1.ChangeDutyCycle(dutyCycle)
-            motor2.ChangeDutyCycle(dutyCycle)
-	    motor3.ChangeDutyCycle(dutyCycle)
-            motor4.ChangeDutyCycle(dutyCycle)
+            drone.goUp()
             
         elif data['direction'] == "down":
-            dutyCycle = dutyCycle - 0.1
-            motor1.ChangeDutyCycle(dutyCycle)
-            motor2.ChangeDutyCycle(dutyCycle)
-            motor3.ChangeDutyCycle(dutyCycle)
-            motor4.ChangeDutyCycle(dutyCycle)
+            drone.goDown()
             
         return "Throttle " + data['direction'] + " by " + str(dutyCycle)
 def main():
