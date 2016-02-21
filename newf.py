@@ -1,6 +1,6 @@
-import DronePackage
+import DroneControl
 
-drone = DronePackage.Drone()
+drone = DroneControl.Drone()
 
 
 drone.start()

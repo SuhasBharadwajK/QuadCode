@@ -3,6 +3,8 @@ import time
 
 class Drone:
     channels = [11, 13, 22, 40]
+    isGoingForward = False; isGoingBack = False
+    isGoingLeft = False; isGoingRight = False
     def __init__(self):
         GPIO.setmode(GPIO.BOARD)
 
@@ -20,6 +22,9 @@ class Drone:
         self.speeds = {self.motor1 : 5, self.motor2 : 5, self.motor3 : 5, self.motor4 : 5.1}
         self.motors = [self.motor1, self.motor2, self.motor3, self.motor4]
 
+
+    def changeInitialSpeeds(self, speed1 = 5, speed2 = 5, speed3 = 5, speed4 = 5):
+        pass
 
     def printSpeeds(self):
         print "Speeds are :"
@@ -48,6 +53,21 @@ class Drone:
             motor.ChangeDutyCycle(self.speeds[motor])
 
         self.printSpeeds()
+
+
+    def goForward(self):
+        self.speeds[self.motor2] += 0.05
+        self.speeds[self.motor3] += 0.05
+        self.motor2.ChangeDutyCycle(self.speeds[self.motor2])
+        self.motor3.ChangeDutyCycle(self.speeds[self.motor3])
+        self.isGoingForward = True
+
+    def goBack(self):
+        self.speeds[self.motor1] += 0.05
+        self.speeds[self.motor4] += 0.05
+        self.motor1.ChangeDutyCycle(self.speeds[self.motor1])
+        self.motor4.ChangeDutyCycle(self.speeds[self.motor4])
+        self.isGoingBack = True
 
 
     def stop(self):
