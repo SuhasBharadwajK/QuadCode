@@ -66,8 +66,10 @@ def act(data):
     else: #type == throttle
         if data["value"] == "up":
             #Do up
-        else
+            pass
+        else:
             #Do down
+            pass
         return "Throttle"
 def main():
     class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
