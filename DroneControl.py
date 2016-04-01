@@ -60,16 +60,18 @@ class Drone:
 
     def goUp(self):
         for motor in self.motors:
-            self.speeds[motor] += 0.1
-            motor.ChangeDutyCycle(self.speeds[motor])
+            if (self.speeds[motor] < 10):
+                self.speeds[motor] += 0.1
+                motor.ChangeDutyCycle(self.speeds[motor])
 
         self.printSpeeds()
 
     
     def goDown(self):
         for motor in self.motors:
-            self.speeds[motor] -= 0.1
-            motor.ChangeDutyCycle(self.speeds[motor])
+            if (self.speeds[motor] > 5):
+                self.speeds[motor] -= 0.1
+                motor.ChangeDutyCycle(self.speeds[motor])
 
         self.printSpeeds()
 

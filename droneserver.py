@@ -5,25 +5,27 @@ from os import curdir, sep
 import RPi.GPIO as GPIO
 import json, ast
 import sys, os
-import DronePackage
+from DroneControl import Drone
 
 started = False
 
-GPIO.cleanup()
+#GPIO.cleanup()
 
-GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
 
 #GPIO.setwarnings(False)
 
-GPIO.setup(33,GPIO.OUT)
-GPIO.setup(29,GPIO.OUT)
-GPIO.setup(18,GPIO.OUT)
-GPIO.setup(31,GPIO.OUT)
+#GPIO.setup(33,GPIO.OUT)
+#GPIO.setup(29,GPIO.OUT)
+#GPIO.setup(18,GPIO.OUT)
+#GPIO.setup(31,GPIO.OUT)
 
-GPIO.output(33,GPIO.LOW)
-GPIO.output(29,GPIO.LOW)
-GPIO.output(18,GPIO.LOW)
-GPIO.output(31,GPIO.LOW)
+#GPIO.output(33,GPIO.LOW)
+#GPIO.output(29,GPIO.LOW)
+#GPIO.output(18,GPIO.LOW)
+#GPIO.output(31,GPIO.LOW)
+
+drone = Drone()
 
 drone.start()
 
@@ -43,19 +45,19 @@ def act(data):
 
     elif data['type'] == "led":
         if data['action'] == "init":
-            GPIO.setmode(GPIO.BOARD)
-            GPIO.setup(33,GPIO.OUT)
-            GPIO.setup(29,GPIO.OUT)
-            GPIO.setup(18,GPIO.OUT)
-            GPIO.setup(31,GPIO.OUT)
+            #GPIO.setmode(GPIO.BOARD)
+            #GPIO.setup(33,GPIO.OUT)
+            #GPIO.setup(29,GPIO.OUT)
+            #GPIO.setup(18,GPIO.OUT)
+            #GPIO.setup(31,GPIO.OUT)
 
-            GPIO.output(33,GPIO.LOW)
-            GPIO.output(29,GPIO.LOW)
-            GPIO.output(18,GPIO.LOW)
-            GPIO.output(31,GPIO.LOW)
+            #GPIO.output(33,GPIO.LOW)
+            #GPIO.output(29,GPIO.LOW)
+            #GPIO.output(18,GPIO.LOW)
+            #GPIO.output(31,GPIO.LOW)
             
-            drone.initialize()
-            drone.start()
+            #drone.initialize()
+            #drone.start()
 
             return "Initialized all LED and motor pins."
 
@@ -71,12 +73,15 @@ def act(data):
 
     elif data['type'] == "throttle":
         if data['direction'] == "up":
+            #print "Throttle up"
             drone.goUp()
             
         elif data['direction'] == "down":
+            #print "Throttle down"
             drone.goDown()
             
-        return "Throttle " + data['direction'] + " by " + str(dutyCycle)
+        #return "Throttle " + data['direction'] + " by " + str(dutyCycle)
+        return "Throttle " + data['direction']
 def main():
     class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         def do_GET(s):

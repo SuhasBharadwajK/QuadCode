@@ -5,7 +5,7 @@ from os import curdir, sep
 import RPi.GPIO as GPIO
 import json, ast
 import sys, os
-import DronePackage
+import DroneControl
 
 started = False
 
@@ -35,20 +35,20 @@ GPIO.setmode(GPIO.BOARD)
 
 #GPIO.setwarnings(False)
 
-GPIO.setup(33,GPIO.OUT)
-GPIO.setup(29,GPIO.OUT)
-GPIO.setup(18,GPIO.OUT)
-GPIO.setup(31,GPIO.OUT)
+#GPIO.setup(33,GPIO.OUT)
+#GPIO.setup(29,GPIO.OUT)
+#GPIO.setup(18,GPIO.OUT)
+#GPIO.setup(31,GPIO.OUT)
 
-GPIO.output(33,GPIO.LOW)
-GPIO.output(29,GPIO.LOW)
-GPIO.output(18,GPIO.LOW)
-GPIO.output(31,GPIO.LOW)
+#GPIO.output(33,GPIO.LOW)
+#GPIO.output(29,GPIO.LOW)
+#GPIO.output(18,GPIO.LOW)
+#GPIO.output(31,GPIO.LOW)
 
-GPIO.setup(11, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(22, GPIO.OUT)
-GPIO.setup(40, GPIO.OUT)
+#GPIO.setup(11, GPIO.OUT)
+#GPIO.setup(13, GPIO.OUT)
+#GPIO.setup(22, GPIO.OUT)
+#GPIO.setup(40, GPIO.OUT)
 
 
 motor1 = GPIO.PWM(11, 50)
