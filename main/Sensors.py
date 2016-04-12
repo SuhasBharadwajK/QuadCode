@@ -11,6 +11,24 @@ class IMU:
         self.bus = smbus.SMBus(1)
         self.address = 0x68
 
+        self.bus.write_byte_data(self.address, self.power_mgmt_1, 0)
+
+        gyro_xout = self.read_word_2c(0x43)
+        gyro_yout = self.read_word_2c(0x45)
+        gyro_zout = self.read_word_2c(0x47)
+
+        accel_xout = self.read_word_2c(0x3b)
+        accel_yout = self.read_word_2c(0x3d)
+        accel_zout = self.read_word_2c(0x3f)
+
+        accel_xout_scaled = accel_xout / 16384.0
+        accel_yout_scaled = accel_yout / 16384.0
+        accel_zout_scaled = accel_zout / 16384.0
+
+        self.roll = self.get_x_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
+        self.pitch = self.get_y_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
+
+
 
     def read_byte(self, adr):
         bus = self.bus
@@ -73,7 +91,17 @@ class IMU:
         roll = self.get_x_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
         pitch = self.get_y_rotation(accel_xout_scaled, accel_yout_scaled, accel_zout_scaled)
 
+        print self.roll, self.pitch
+
         return (roll, pitch)
+
+    def getRoll(self):
+        #self.wakeAndPrint()
+        return self.roll
+
+    def getPitch(self):
+        #self.wakeAndPrint()
+        return self.pitch
 
 class Compass:
     def __init__(self):
@@ -122,7 +150,9 @@ class Compass:
 
 
 imu = IMU()
+print imu.getRoll()
+print imu.getPitch()
 print imu.wakeAndPrint()
 
-compass = Compass()
-print compass.getYaw()
+#compass = Compass()
+#print compass.getYaw()

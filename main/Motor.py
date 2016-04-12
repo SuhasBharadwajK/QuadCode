@@ -6,13 +6,17 @@ class Motor:
         self.pin = pin
         self.throttle = throttle
 
-    def increaseThrottle():
-        pass
+    def increaseThrottle(self):
+        self.throttle += 10
+        #print "Throttle of motor " + str(self.number) + " is " + str(self.throttle)
+        call(["pigs", "s", str(self.pin), str(self.throttle)])
 
-    def decreaseThrottle():
-        pass
+    def decreaseThrottle(self):
+        self.throttle -= 10
+        #print "Throttle of motor " + str(self.number) + " is " + str(self.throttle)
+        call(["pigs", "s", str(self.pin), str(self.throttle)])
 
     def setThrottle(self, throttle):
         self.throttle = throttle
-        print "Throttle of motor " + str(self.number) + " is " + str(self.throttle)
+        #print "Throttle of motor " + str(self.number) + " is " + str(self.throttle)
         call(["pigs", "s", str(self.pin), str(self.throttle)])
